@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品詳細</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
+</head>
+<body>
+<div class="uk-container uk-container-large uk-width-2-3">
+    <h1 class="uk-margin-top uk-heading-primary">商品詳細</h1>
+    <form th:action="@{/products/putincart}" method="post" accept-charset="utf-8">
+        <div th:object="${product}">
+
+            <div class="uk-panel">
+                <input type="hidden" name="id" th:value="*{id}">
+                <li>商品名
+                    <ul>
+                        <li th:text="*{name}"></li>
+                    </ul>
+                </li>
+                <li>価格
+                    <ul>
+                        <li th:text="*{price}"></li>
+                    </ul>
+                </li>
+            </div>
+            <button class="uk-button uk-button-default" type="submit">カートに入れる</button>
+        </div>
+    </form>
+    <a href="/products">一覧に戻る</a>
+
+</div>
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
+</body>
+</html>

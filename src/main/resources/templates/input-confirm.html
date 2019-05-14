@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>購入者情報</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
+</head>
+<body>
+    <div class="uk-container uk-container-large uk-width-2-3">
+        <h1 class="uk-margin-top uk-heading-primary">購入者情報</h1>
+        <form th:action="@{/products/showconfirm}" method="POST" accept-charset="utf-8" th:object="${confirmationForm}">
+            <fieldset class="uk-fieldset">
+
+                <legend class="uk-legend">購入者情報</legend>
+
+                <div class="uk-margin">
+                    <input id="name" class="uk-input" type="text" name="name" placeholder="お名前" th:field="*{name}">
+                    <span class="uk-text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </div>
+
+                <div class="uk-margin">
+                    <input id="address" class="uk-input" type="text" name="address" placeholder="住所" th:field="*{address}">
+                    <span class="uk-text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+                </div>
+
+                <div class="uk-margin">
+                    <input id="phone" class="uk-input" type="text" name="phone" value="" placeholder="電話番号" th:field="*{phone}">
+                    <span class="uk-text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+                </div>
+
+            </fieldset>
+            <button class="uk-button uk-button-default" type="submit">購入確認</button>
+        </form>
+        <a href="/products">一覧に戻る</a>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
+    <script>
+        'use strict';
+
+        var name = document.getElementById("name");
+        var address = document.getElementById("address");
+        var phone = document.getElementById("phone");
+
+        function phoneCheck(){
+            var isValid = true
+            if(phone.value === ""){
+                isValid = false;
+                console.log("空欄チェック");
+            }
+            else if(!phone.value.match(/^[0-9]*$/)){
+                isValid = false;
+                console.log("半角チェック");
+            }
+            else if(phone.value.length < 10 || 11 < phone.value.length){
+                isValid = false;
+                console.log("Lengthチェック");
+            }
+
+            if(!isValid){
+                phone.style.background="red";
+            }else{
+                phone.style.background="none";
+            }
+        }
+    </script>
+</body>
+</html>
